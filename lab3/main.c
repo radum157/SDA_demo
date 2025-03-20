@@ -31,7 +31,7 @@ int main()
 	for (int i = 0; i < 5; i++) {
 		node_t *new_node = newNode(malloc(sizeof(int)));
 		*(int *)new_node->data = values[i];
-		insertNode(&myList, new_node, 10);
+		insertNode(&myList, new_node, 100);
 	}
 
 	printf("After insertion:\n");

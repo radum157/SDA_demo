@@ -40,11 +40,8 @@ node_t *newNode(void *data /*, size_t dataSize*/)
 
 node_t *findNode(list_t list, size_t pos)
 {
-	if (list.size == 0) {
+	if (list.size == 0 || pos >= list.size) {
 		return NULL;
-	}
-	if (pos >= list.size) {
-		pos = list.size - 1;
 	}
 
 	node_t *it = list.head;
@@ -91,6 +88,10 @@ void insertNode(list_t *list, node_t *node, size_t pos)
 		list->size++;
 
 		return;
+	}
+
+	if (pos > list->size) {
+		pos = list->size;
 	}
 
 	node_t *prev = findNode(*list, pos - 1);
