@@ -27,27 +27,47 @@ hash3(const char *str)
     return hash % TABLE_SIZE;
 }
 
-void insert(hashmap_t *map, const char *key, int value) {
-    // TODO: Change to other hash function and observe differences
-    unsigned int index = hash3(key);
-    node_t *newNode = (node_t *) malloc(sizeof(node_t));
 
-    newNode->key = strdup(key);
-    newNode->value = value;
-    newNode->next = map->buckets[index];
-    map->buckets[index] = newNode;
+void insert(hashmap_t *map, const void *key, const void *value) {
+    // TODO: Change to other hash function and observe differences
+    unsigned int index = hash3((const char *)key);
+    node_t *new_node = (node_t *) malloc(sizeof(node_t));
+
+    new_node->key = malloc(map->key_len);
+    memcpy(new_node->key, key, map->key_len);
+
+    new_node->value = malloc(map->val_len);
+    memcpy(new_node->value, value, map->val_len);
+
+    new_node->next = map->buckets[index];
+    map->buckets[index] = new_node;
 }
 
-int search(hashmap_t *map, const char *key) {
+void *search(hashmap_t *map, const void *key) {
     // TODO: Change to other hash function and observe differences
-    unsigned int index = hash3(key);
+    unsigned int index = hash3((const char *)key);
     node_t *node = map->buckets[index];
 
     while (node) {
-        if (strcmp(node->key, key) == 0) {
+        if (map->eq_func(key, node->key, map->key_len)) {
             return node->value;
         }
         node = node->next;
     }
-    return -1; // Not found
+    return NULL; // Not found
+}
+
+bool comp(const void *k1, const void *k2, unsigned int size) {
+    return memcmp(k1, k2, size) == 0;
+}
+
+void init_map(hashmap_t *map, eq_func_t func, unsigned int key_len,
+              unsigned int val_len) {
+    if (func == NULL) {
+        map->eq_func = comp;
+    } else {
+        map->eq_func = func;
+    }
+    map->key_len = key_len;
+    map->val_len = val_len;
 }

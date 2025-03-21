@@ -25,12 +25,13 @@ std::vector<KeyVal> get_input() {
 
 void benchmark_hashmap(std::vector<KeyVal> &input) {
 	hashmap_t map{};
+	init_map(&map, NULL, 10, 4);
 	clock_t start, end;
 
 	std::cout << "Benchmarking my hash_map:\n";
 	start = clock();
 	for (const auto &[k, v] : input) {
-		insert(&map, k.data(), v);
+		insert(&map, k.data(), &v);
 	}
 	end = clock();
 	std::cout << "Inserted " << input.size() << " entries in " <<
