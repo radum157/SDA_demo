@@ -1,6 +1,8 @@
 import random
 import string
 
+import sys
+
 
 def generate_test_file(filename="input.txt", num_entries=1000):
     with open(filename, "w") as f:
@@ -15,4 +17,4 @@ def generate_test_file(filename="input.txt", num_entries=1000):
 
 
 if __name__ == "__main__":
-    generate_test_file(num_entries=1000000)
+    generate_test_file(num_entries=int(sys.argv[1]))
