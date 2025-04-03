@@ -21,6 +21,7 @@ typedef struct hashmap {
     unsigned int val_len;
 
     eq_func_t eq_func;
+    unsigned int (*hash)(const char *k);
 } hashmap_t;
 
 unsigned int hash(const char *key);
