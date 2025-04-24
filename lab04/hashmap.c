@@ -30,7 +30,7 @@ hash3(const char *str)
 
 void insert(hashmap_t *map, const void *key, const void *value) {
     // TODO: Change to other hash function and observe differences
-    unsigned int index = hash3((const char *)key);
+    unsigned int index = hash((const char *)key);
     node_t *new_node = (node_t *) malloc(sizeof(node_t));
 
     new_node->key = malloc(map->key_len);
@@ -45,7 +45,7 @@ void insert(hashmap_t *map, const void *key, const void *value) {
 
 void *search(hashmap_t *map, const void *key) {
     // TODO: Change to other hash function and observe differences
-    unsigned int index = hash3((const char *)key);
+    unsigned int index = hash((const char *)key);
     node_t *node = map->buckets[index];
 
     while (node) {

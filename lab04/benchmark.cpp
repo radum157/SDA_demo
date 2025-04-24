@@ -35,7 +35,7 @@ void benchmark_hashmap(std::vector<KeyVal> &input) {
 	}
 	end = clock();
 	std::cout << "Inserted " << input.size() << " entries in " <<
-			(float)(end - start) / CLOCKS_PER_SEC << " ms\n";
+			(float)(end - start) / CLOCKS_PER_SEC << " s\n";
 
 	start = clock();
 	for (const auto &[k, _] : input) {
@@ -43,7 +43,7 @@ void benchmark_hashmap(std::vector<KeyVal> &input) {
 	}
 	end = clock();
 	std::cout << "Queried " << input.size() << " entries in " <<
-			(float)(end - start) / CLOCKS_PER_SEC << " ms\n";
+			(float)(end - start) / CLOCKS_PER_SEC << " s\n";
 }
 
 void benchmark_unordered_map(std::vector<KeyVal> &input) {
@@ -57,7 +57,7 @@ void benchmark_unordered_map(std::vector<KeyVal> &input) {
 	}
 	end = clock();
 	std::cout << "Inserted " << input.size() << " entries in " <<
-			(float)(end - start) / CLOCKS_PER_SEC << " ms\n";
+			(float)(end - start) / CLOCKS_PER_SEC << " s\n";
 
 	start = clock();
 	for (const auto &[k, _] : input) {
@@ -65,7 +65,7 @@ void benchmark_unordered_map(std::vector<KeyVal> &input) {
 	}
 	end = clock();
 	std::cout << "Queried " << input.size() << " entries in " <<
-			(float)(end - start) / CLOCKS_PER_SEC << " ms\n";
+			(float)(end - start) / CLOCKS_PER_SEC << " s\n";
 }
 
 int main() {
